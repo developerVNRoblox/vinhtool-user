@@ -2,7 +2,7 @@
 // @name         Trần Quang Vinh Tool - UGPhone
 // @namespace    vinh-ugphone
 // @version      1.0.0
-// @description  Tiện ích UGPhone by Trần Quang Vinh - remake từ Hanami Nikata
+// @description  Tiện ích UGPhone by TRUM DEV ROBLOX
 // @author       Trần Quang Vinh
 // @match        *://*.ugphone.com/toc-portal/*
 // @icon         https://i.postimg.cc/Rhv19Fgs/icon128.png
