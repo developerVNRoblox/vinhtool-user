@@ -1,59 +1,101 @@
 (function () {
-  'use strict';
+    const styles = `
+#vinh-toggle-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  background: #00bcd4 url('https://ibb.co/bgfjwmP3') center/cover no-repeat;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+  cursor: pointer;
+  z-index: 99999;
+}
+#vinh-gui {
+  font-family: Arial, sans-serif;
+  position: fixed;
+  top: 80px;
+  left: 30px;
+  z-index: 99998;
+  background: #ffffff;
+  border: 2px solid #00bcd4;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  padding: 15px;
+  width: 300px;
+  display: none;
+}
+#vinh-gui h1 {
+  font-size: 18px;
+  color: #007acc;
+  margin: 0 0 10px;
+  text-align: center;
+}
+#vinh-gui input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+#vinh-gui button {
+  width: 100%;
+  padding: 10px;
+  background: #007acc;
+  color: white;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#vinh-gui button:hover {
+  background: #005f99;
+}
+#vinh-gui-message {
+  text-align: center;
+  font-size: 13px;
+  color: #333;
+  margin-top: 10px;
+}
+    `;
+    const styleTag = document.createElement("style");
+    styleTag.innerText = styles;
+    document.head.appendChild(styleTag);
 
-  const gui = document.createElement('div');
-  gui.id = "vinh-tool";
-  gui.innerHTML = `
-    <div style="
-      position: fixed;
-      top: 60px;
-      left: 60px;
-      background: #f9f9f9;
-      border: 2px solid #007bff;
-      border-radius: 8px;
-      padding: 15px;
-      z-index: 999999;
-      width: 300px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      font-family: Arial, sans-serif;
-    ">
-      <h2 style="color:#007bff; margin: 0 0 10px 0;">🔥 Trần Quang Vinh Tool</h2>
-      
-      <label>Nhập token:</label>
-      <input id="vinh-token" type="text" placeholder="Dán token..." style="width: 100%; margin: 5px 0; padding: 5px; border-radius: 4px; border: 1px solid #ccc;">
-      <button id="vinh-check" style="margin-bottom:10px; background-color:#007bff;color:white;padding:6px;border:none;border-radius:4px;cursor:pointer;width:100%;">Kiểm Tra Token</button>
+    const icon = document.createElement("div");
+    icon.id = "vinh-toggle-btn";
+    document.body.appendChild(icon);
 
-      <hr>
+    const html = `
+<div id="vinh-gui">
+  <h1>Tiện ích Trần Quang Vinh</h1>
+  <input type="text" id="vinh-token" placeholder="Nhập token của bạn...">
+  <button id="vinh-check">Kiểm Tra</button>
+  <div id="vinh-gui-message">💬 Vui lòng dán token để bắt đầu.</div>
+</div>
+    `;
+    const container = document.createElement("div");
+    container.innerHTML = html;
+    document.body.appendChild(container);
 
-      <button id="vinh-get4h" style="background-color:#28a745;color:white;padding:6px;border:none;border-radius:4px;cursor:pointer;width:100%;">Nhận máy UGPhone 4H</button>
-      
-      <button id="vinh-manage" style="margin-top:8px; background-color:#ffc107;color:#212529;padding:6px;border:none;border-radius:4px;cursor:pointer;width:100%;">Quản lý tài khoản</button>
+    icon.addEventListener("click", () => {
+        const box = document.getElementById("vinh-gui");
+        box.style.display = box.style.display === "none" ? "block" : "none";
+    });
 
-      <button id="vinh-logout" style="margin-top:8px;background-color:#dc3545;color:white;padding:6px;border:none;border-radius:4px;cursor:pointer;width:100%;">Đăng xuất & Xóa token</button>
-
-      <p style="font-size:12px; text-align:center; margin-top:10px; color:#555;">© Trần Quang Vinh - v1.0.0</p>
-    </div>
-  `;
-  document.body.appendChild(gui);
-
-  // ====== TÍCH HỢP CHỨC NĂNG (GIẢ LẬP) ======
-
-  document.getElementById('vinh-check').onclick = () => {
-    const token = document.getElementById('vinh-token').value;
-    if (!token) return alert("Nhập token vào đi ba!");
-    alert("✅ Token hợp lệ (giả lập)\n👉 Tính năng thật đang được code...");
-  };
-
-  document.getElementById('vinh-get4h').onclick = () => {
-    alert("🎉 Đã nhận máy ảo 4H (giả lập)!\n👉 Sau sẽ tích hợp nhận máy thật.");
-  };
-
-  document.getElementById('vinh-manage').onclick = () => {
-    alert("🛠 Tính năng quản lý tài khoản đang xây dựng...");
-  };
-
-  document.getElementById('vinh-logout').onclick = () => {
-    document.getElementById('vinh-token').value = "";
-    alert("🚪 Đã xóa token & đăng xuất (giả lập).");
-  };
+    document.getElementById("vinh-check").addEventListener("click", () => {
+        const token = document.getElementById("vinh-token").value.trim();
+        const msg = document.getElementById("vinh-gui-message");
+        if (!token) {
+            msg.innerText = "❌ Token không được để trống!";
+            msg.style.color = "red";
+        } else {
+            msg.innerText = "✅ Token hợp lệ! (Fake thôi 😎)";
+            msg.style.color = "green";
+        }
+    });
 })();
