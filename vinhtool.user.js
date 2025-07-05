@@ -17,7 +17,7 @@
 (function () {
   'use strict';
 
-  const SOURCE_CODE_URL = 'https://raw.githubusercontent.com/developerVNRoblox/vinhtool-user/main/vinhtool-core.js';
+  const SOURCE_CODE_URL = 'https://raw.githubusercontent.com/developerVNRoblox/vinhtool-user/refs/heads/main/vinhtool-core.js';
 
   console.log("VinhTool Loader: Đang tải script chính từ GitHub...");
 
